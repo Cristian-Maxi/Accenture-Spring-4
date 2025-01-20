@@ -75,7 +75,7 @@ public class UserEntityServiceImplTest {
     }
 
     @Test
-    void testGetAll_Success() {
+    void testGetAllSuccess() {
         when(userEntityRepository.findAll()).thenReturn(List.of(userEntity));
         when(userEntityMapper.toResponseListDTO(List.of(userEntity))).thenReturn(List.of(userEntityResponseDTO));
 
@@ -91,7 +91,7 @@ public class UserEntityServiceImplTest {
     }
 
     @Test
-    void testUserTasks_Success() {
+    void testUserTasksSuccess() {
         when(userEntityRepository.findById(userEntity.getId())).thenReturn(Optional.of(userEntity));
         when(taskEntityRepository.findByUserEntityId(userEntity.getId())).thenReturn(List.of(taskEntity));
         when(taskEntityMapper.toTaskResponseSetDTO(List.of(taskEntity))).thenReturn(Set.of(new TaskEntityResponseDTO(1L, "Task 1", "Description", Status.PENDING)));
@@ -110,7 +110,7 @@ public class UserEntityServiceImplTest {
     }
 
     @Test
-    void testUserTasks_UserNotFound() {
+    void testUserTasksUserNotFound() {
         when(userEntityRepository.findById(userEntity.getId())).thenReturn(Optional.empty());
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
@@ -124,7 +124,7 @@ public class UserEntityServiceImplTest {
     }
 
     @Test
-    void testUserTasks_NoTasksFound() {
+    void testUserTasksNoTasksFound() {
         when(userEntityRepository.findById(userEntity.getId())).thenReturn(Optional.of(userEntity));
         when(taskEntityRepository.findByUserEntityId(userEntity.getId())).thenReturn(List.of());
 

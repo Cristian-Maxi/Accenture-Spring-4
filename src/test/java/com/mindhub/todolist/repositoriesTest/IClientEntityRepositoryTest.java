@@ -58,7 +58,7 @@ public class IClientEntityRepositoryTest {
         ClientEntity client = new ClientEntity("Cristian", "Gomez", user);
         ClientEntity savedClient = clientEntityRepository.save(client);
 
-        savedClient.setName("Maximiiano");
+        savedClient.setName("Maximiliano");
         savedClient.setLastname("Montenegro");
         ClientEntity updatedClient = clientEntityRepository.save(savedClient);
 

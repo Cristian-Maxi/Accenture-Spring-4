@@ -41,7 +41,7 @@ public class UserEntityControllerTest {
     }
 
     @Test
-    public void testGetAllUsuarios_SuccessWithData() {
+    public void testGetAllUsuariosSuccessWithData() {
         List<UserEntityResposeDTO> userList = List.of(
                 new UserEntityResposeDTO(1L, "cristian@outlook.com", RoleEnum.USER),
                 new UserEntityResposeDTO(2L, "cristian@outlook.com", RoleEnum.ADMIN)
@@ -58,7 +58,7 @@ public class UserEntityControllerTest {
     }
 
     @Test
-    public void testGetAllUsuarios_NoData() {
+    public void testGetAllUsuariosNoData() {
         when(userEntityService.getAll()).thenReturn(Collections.emptyList());
 
         ResponseEntity<ApiResponseDTO<UserEntityResposeDTO>> response = userEntityController.getAllUsuarios();
@@ -70,7 +70,7 @@ public class UserEntityControllerTest {
     }
 
     @Test
-    public void testGetAllUsuarios_Exception() {
+    public void testGetAllUsuariosException() {
         when(userEntityService.getAll()).thenThrow(new ApplicationException("Error fetching data"));
 
         Exception exception = assertThrows(ApplicationException.class, () -> {
@@ -81,7 +81,7 @@ public class UserEntityControllerTest {
     }
 
     @Test
-    public void testFindUserTasksById_Success() {
+    public void testFindUserTasksByIdSuccess() {
         Long userId = 1L;
         UserEntityTasksResponseDTO userTasksResponse = new UserEntityTasksResponseDTO(
                 userId,
@@ -102,7 +102,7 @@ public class UserEntityControllerTest {
     }
 
     @Test
-    public void testFindUserTasksById_UserNotFound() {
+    public void testFindUserTasksByIdUserNotFound() {
         Long userId = 1L;
 
         when(userEntityService.userTasks(userId)).thenThrow(new IllegalArgumentException("No se encontró el ID del usuario ingresado"));
@@ -115,7 +115,7 @@ public class UserEntityControllerTest {
     }
 
     @Test
-    public void testFindUserTasksById_NoTasksFound() {
+    public void testFindUserTasksByIdNoTasksFound() {
         Long userId = 1L;
 
         when(userEntityService.userTasks(userId)).thenThrow(new EntityNotFoundException("No se encontraron tareas para el usuario con ID: " + userId));

@@ -53,6 +53,7 @@ public class AdminEntityServiceImplTest {
     @BeforeEach
     void setUp() {
 
+
         UserEntity userEntity = new UserEntity();
         userEntity.setEmail("cristian@outlook.com");
         userEntity.setPassword("password123");
@@ -88,7 +89,7 @@ public class AdminEntityServiceImplTest {
     }
 
     @Test
-    void testSavedAdminEntity_Success() {
+    void testSavedAdminEntitySuccess() {
         when(userEntityRepository.existsByEmail(adminEntityRequestDTO.user().getEmail())).thenReturn(false);
         when(passwordEncoder.encode(adminEntityRequestDTO.user().getPassword())).thenReturn("encodedPassword");
         when(adminEntityMapper.toEntity(adminEntityRequestDTO)).thenReturn(adminEntity);
@@ -98,14 +99,15 @@ public class AdminEntityServiceImplTest {
         AdminEntityResponseDTO result = adminEntityService.savedAdminEntity(adminEntityRequestDTO);
 
         assertNotNull(result);
-        assertEquals("Cristian", result.name());
-        assertEquals("Gomez", result.lastname());
+        assertEquals(result.id(), adminEntity.getId());
+        assertEquals(result.name(), adminEntity.getName());
+        assertEquals(result.lastname(), adminEntity.getLastname());
 
         verify(adminEntityRepository).save(adminEntity);
     }
 
     @Test
-    void testSavedAdminEntity_EmailAlreadyExists() {
+    void testSavedAdminEntityEmailAlreadyExists() {
         when(userEntityRepository.existsByEmail(adminEntityRequestDTO.user().getEmail())).thenReturn(true);
 
         ApplicationException exception = assertThrows(ApplicationException.class, () ->
@@ -117,24 +119,24 @@ public class AdminEntityServiceImplTest {
     }
 
     @Test
-    void testUpdate_Success() {
+    void testUpdateSuccess() {
         when(adminEntityRepository.findById(adminEntityUpdateDTO.id())).thenReturn(Optional.of(adminEntity));
         when(adminEntityRepository.save(adminEntity)).thenReturn(adminEntity);
         when(adminEntityMapper.toAdminResponseDTO(any(AdminEntity.class))).thenReturn(
-                new AdminEntityResponseDTO(1L, "UpdatedName", "UpdatedLastname")
+                new AdminEntityResponseDTO(1L, "Maximiliano", "Montenegro")
         );
 
         AdminEntityResponseDTO result = adminEntityService.update(adminEntityUpdateDTO);
 
         assertNotNull(result);
-        assertEquals("Maximiliano", result.name());
-        assertEquals("Montenegro", result.lastname());
+        assertEquals(result.name(), adminEntity.getName());
+        assertEquals(result.lastname(), adminEntity.getLastname());
 
         verify(adminEntityRepository).save(adminEntity);
     }
 
     @Test
-    void testUpdate_EntityNotFound() {
+    void testUpdateEntityNotFound() {
         when(adminEntityRepository.findById(adminEntityUpdateDTO.id())).thenReturn(Optional.empty());
 
         //assertThrows(EntityNotFoundException.class, () -> adminEntityService.update(adminEntityUpdateDTO));
@@ -147,7 +149,7 @@ public class AdminEntityServiceImplTest {
     }
 
     @Test
-    void testDelete_Success() {
+    void testDeleteSuccess() {
         when(adminEntityRepository.findById(adminEntity.getId())).thenReturn(Optional.of(adminEntity));
 
         adminEntityService.delete(adminEntity.getId());
@@ -156,7 +158,7 @@ public class AdminEntityServiceImplTest {
     }
 
     @Test
-    void testDelete_EntityNotFound() {
+    void testDeleteEntityNotFound() {
         when(adminEntityRepository.findById(adminEntity.getId())).thenReturn(Optional.empty());
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
@@ -168,7 +170,7 @@ public class AdminEntityServiceImplTest {
     }
 
     @Test
-    void testExistById_Success() {
+    void testExistByIdSuccess() {
         when(adminEntityRepository.existsById(adminEntity.getId())).thenReturn(true);
 
         boolean exists = adminEntityService.existById(adminEntity.getId());
@@ -178,7 +180,7 @@ public class AdminEntityServiceImplTest {
     }
 
     @Test
-    void testExistById_NotExists() {
+    void testExistByIdNotExists() {
         when(adminEntityRepository.existsById(adminEntity.getId())).thenReturn(false);
 
         boolean exists = adminEntityService.existById(adminEntity.getId());

@@ -77,7 +77,7 @@ public class TaskEntityServiceImplTest {
     }
 
     @Test
-    void countByUserEntityId_ShouldReturnCount() {
+    void countByUserEntityIdShouldReturnCount() {
         // Arrange
         Long userId = 1L;
         when(taskEntityRepository.countByUserEntityId(userId)).thenReturn(5L);
@@ -91,7 +91,7 @@ public class TaskEntityServiceImplTest {
     }
 
     @Test
-    void saveTask_ShouldReturnTaskResponseDTO() {
+    void saveTaskShouldReturnTaskResponseDTO() {
         // Arrange
         when(taskEntityMapper.toEntity(mockRequestDTO)).thenReturn(mockTask);
         when(taskEntityRepository.save(any(TaskEntity.class))).thenReturn(mockTask);
@@ -108,7 +108,7 @@ public class TaskEntityServiceImplTest {
     }
 
     @Test
-    void getAll_ShouldReturnAllTasks() {
+    void getAllShouldReturnAllTasks() {
         // Arrange
         when(taskEntityRepository.findAll()).thenReturn(Arrays.asList(mockTask));
         Set<TaskEntityResponseDTO> expectedResponse = new HashSet<>(Arrays.asList(mockResponseDTO));
@@ -124,7 +124,7 @@ public class TaskEntityServiceImplTest {
     }
 
     @Test
-    void update_ShouldUpdateAndReturnTask() {
+    void updateShouldUpdateAndReturnTask() {
         // Arrange
         when(taskEntityRepository.findById(mockUpdateDTO.id())).thenReturn(Optional.of(mockTask));
         when(taskEntityRepository.save(any(TaskEntity.class))).thenReturn(mockTask);
@@ -139,7 +139,7 @@ public class TaskEntityServiceImplTest {
     }
 
     @Test
-    void update_ShouldThrowEntityNotFoundException() {
+    void updateShouldThrowEntityNotFoundException() {
         // Arrange
         when(taskEntityRepository.findById(mockUpdateDTO.id())).thenReturn(Optional.empty());
 
@@ -151,7 +151,7 @@ public class TaskEntityServiceImplTest {
     }
 
     @Test
-    void delete_ShouldDeleteTask() {
+    void deleteShouldDeleteTask() {
         // Arrange
         when(taskEntityRepository.findById(1L)).thenReturn(Optional.of(mockTask));
 
@@ -163,7 +163,7 @@ public class TaskEntityServiceImplTest {
     }
 
     @Test
-    void delete_ShouldThrowEntityNotFoundException() {
+    void deleteShouldThrowEntityNotFoundException() {
         // Arrange
         when(taskEntityRepository.findById(1L)).thenReturn(Optional.empty());
 

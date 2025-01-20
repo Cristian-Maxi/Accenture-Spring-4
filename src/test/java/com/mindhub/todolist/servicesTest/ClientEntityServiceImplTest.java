@@ -86,7 +86,7 @@ public class ClientEntityServiceImplTest {
     }
 
     @Test
-    void testSaveClientEntity_Success() {
+    void testSaveClientEntitySuccess() {
         when(userEntityRepository.existsByEmail(clientEntityRequestDTO.user().getEmail())).thenReturn(false);
         when(passwordEncoder.encode(clientEntityRequestDTO.user().getPassword())).thenReturn("encodedPassword");
         when(clientEntityMapper.toEntity(clientEntityRequestDTO)).thenReturn(clientEntity);
@@ -96,14 +96,14 @@ public class ClientEntityServiceImplTest {
         ClientEntityResponseDTO result = clientEntityService.saveClientEntity(clientEntityRequestDTO);
 
         assertNotNull(result);
-        assertEquals("Cristian", result.name());
-        assertEquals("Gomez", result.lastname());
+        assertEquals(clientEntity.getName(), result.name());
+        assertEquals(clientEntity.getLastname(), result.lastname());
 
         verify(clientEntityRepository).save(clientEntity);
     }
 
     @Test
-    void testSaveClientEntity_EmailAlreadyExists() {
+    void testSaveClientEntityEmailAlreadyExists() {
         when(userEntityRepository.existsByEmail(clientEntityRequestDTO.user().getEmail())).thenReturn(true);
 
         ApplicationException exception = assertThrows(ApplicationException.class, () ->
@@ -115,7 +115,7 @@ public class ClientEntityServiceImplTest {
     }
 
     @Test
-    void testUpdate_Success() {
+    void testUpdateSuccess() {
         when(clientEntityRepository.findById(clientEntityUpdateDTO.id())).thenReturn(Optional.of(clientEntity));
         when(clientEntityMapper.toClientResponseDTO(clientEntity)).thenReturn(
                 new ClientEntityResponseDTO(1L, "UpdatedName", "UpdatedLastname")
@@ -124,14 +124,14 @@ public class ClientEntityServiceImplTest {
         ClientEntityResponseDTO result = clientEntityService.update(clientEntityUpdateDTO);
 
         assertNotNull(result);
-        assertEquals("Maximiliano", result.name());
-        assertEquals("Montenegro", result.lastname());
+        assertEquals(clientEntity.getName(), result.name());
+        assertEquals(clientEntity.getLastname(), result.lastname());
 
         verify(clientEntityRepository).save(clientEntity);
     }
 
     @Test
-    void testUpdate_EntityNotFound() {
+    void testUpdateEntityNotFound() {
         when(clientEntityRepository.findById(clientEntityUpdateDTO.id())).thenReturn(Optional.empty());
 
         EntityNotFoundException exception = assertThrows(EntityNotFoundException.class, () ->
@@ -143,7 +143,7 @@ public class ClientEntityServiceImplTest {
     }
 
     @Test
-    void testDelete_Success() {
+    void testDeleteSuccess() {
         when(clientEntityRepository.findById(clientEntity.getId())).thenReturn(Optional.of(clientEntity));
 
         clientEntityService.delete(clientEntity.getId());
@@ -152,7 +152,7 @@ public class ClientEntityServiceImplTest {
     }
 
     @Test
-    void testDelete_EntityNotFound() {
+    void testDeleteEntityNotFound() {
         when(clientEntityRepository.findById(clientEntity.getId())).thenReturn(Optional.empty());
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
@@ -164,7 +164,7 @@ public class ClientEntityServiceImplTest {
     }
 
     @Test
-    void testExistById_Success() {
+    void testExistByIdSuccess() {
         when(clientEntityRepository.existsById(clientEntity.getId())).thenReturn(true);
 
         boolean exists = clientEntityService.existById(clientEntity.getId());
@@ -174,7 +174,7 @@ public class ClientEntityServiceImplTest {
     }
 
     @Test
-    void testExistById_NotExists() {
+    void testExistByIdNotExists() {
         when(clientEntityRepository.existsById(clientEntity.getId())).thenReturn(false);
 
         boolean exists = clientEntityService.existById(clientEntity.getId());

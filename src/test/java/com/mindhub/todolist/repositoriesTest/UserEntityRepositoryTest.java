@@ -38,7 +38,7 @@ public class UserEntityRepositoryTest {
     }
 
     @Test
-    void testFindById_Success() {
+    void testFindByIdSuccess() {
         UserEntity savedUser = entityManager.persistFlushFind(userEntity);
 
         Optional<UserEntity> result = userEntityRepository.findById(savedUser.getId());
@@ -49,14 +49,14 @@ public class UserEntityRepositoryTest {
     }
 
     @Test
-    void testFindById_NotFound() {
+    void testFindByIdNotFound() {
         Optional<UserEntity> result = userEntityRepository.findById(999L);
 
         assertFalse(result.isPresent());
     }
 
     @Test
-    void testSave_Success() {
+    void testSaveSuccess() {
         UserEntity savedUser = userEntityRepository.save(userEntity);
 
         assertNotNull(savedUser.getId());
@@ -64,7 +64,7 @@ public class UserEntityRepositoryTest {
     }
 
     @Test
-    void testFindAll_Success() {
+    void testFindAllSuccess() {
         entityManager.persist(userEntity);
 
         List<UserEntity> users = userEntityRepository.findAll();
@@ -75,7 +75,7 @@ public class UserEntityRepositoryTest {
     }
 
     @Test
-    void testExistsByEmail_Success() {
+    void testExistsByEmailSuccess() {
         entityManager.persist(userEntity);
 
         boolean exists = userEntityRepository.existsByEmail("cristian@outlook.com");
@@ -84,14 +84,14 @@ public class UserEntityRepositoryTest {
     }
 
     @Test
-    void testExistsByEmail_NotExists() {
+    void testExistsByEmailNotExists() {
         boolean exists = userEntityRepository.existsByEmail("cristian@outlook.com");
 
         assertFalse(exists);
     }
 
     @Test
-    void testDeleteById_Success() {
+    void testDeleteByIdSuccess() {
         UserEntity savedUser = entityManager.persistFlushFind(userEntity);
 
         userEntityRepository.deleteById(savedUser.getId());
