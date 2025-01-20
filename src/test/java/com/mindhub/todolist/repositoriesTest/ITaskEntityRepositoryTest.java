@@ -26,13 +26,13 @@ public class ITaskEntityRepositoryTest {
     @Test
     void testSaveTaskEntity() {
         UserEntity user = new UserEntity();
-        user.setEmail("testuser@example.com");
+        user.setEmail("cristian@outlook.com");
         user.setPassword("password");
         UserEntity savedUser = userEntityRepository.save(user);
 
         TaskEntity task = new TaskEntity();
-        task.setTitle("Test Task");
-        task.setDescription("This is a test task");
+        task.setTitle("Comprar Pan");
+        task.setDescription("Ir a comprar pan");
         task.setStatus(Status.PENDING);
         task.setUserEntity(savedUser);
 
@@ -40,20 +40,20 @@ public class ITaskEntityRepositoryTest {
 
         assertThat(savedTask).isNotNull();
         assertThat(savedTask.getId()).isNotNull();
-        assertThat(savedTask.getTitle()).isEqualTo("Test Task");
-        assertThat(savedTask.getUserEntity().getEmail()).isEqualTo("testuser@example.com");
+        assertThat(savedTask.getTitle()).isEqualTo("Comprar Pan");
+        assertThat(savedTask.getUserEntity().getEmail()).isEqualTo("cristian@outlook.com");
     }
 
     @Test
     void testFindById() {
         UserEntity user = new UserEntity();
-        user.setEmail("testuser@example.com");
+        user.setEmail("cristian@outlook.com");
         user.setPassword("password");
         UserEntity savedUser = userEntityRepository.save(user);
 
         TaskEntity task = new TaskEntity();
-        task.setTitle("Test Task");
-        task.setDescription("This is a test task");
+        task.setTitle("Comprar Pan");
+        task.setDescription("Ir a comprar pan");
         task.setStatus(Status.PENDING);
         task.setUserEntity(savedUser);
         TaskEntity savedTask = taskEntityRepository.save(task);
@@ -67,35 +67,35 @@ public class ITaskEntityRepositoryTest {
     @Test
     void testUpdateTaskEntity() {
         UserEntity user = new UserEntity();
-        user.setEmail("testuser@example.com");
+        user.setEmail("cristian@outlook.com");
         user.setPassword("password");
         UserEntity savedUser = userEntityRepository.save(user);
 
         TaskEntity task = new TaskEntity();
-        task.setTitle("Test Task");
-        task.setDescription("This is a test task");
+        task.setTitle("Comprar Pan");
+        task.setDescription("Ir a comprar pan");
         task.setStatus(Status.PENDING);
         task.setUserEntity(savedUser);
         TaskEntity savedTask = taskEntityRepository.save(task);
 
-        savedTask.setTitle("Updated Task Title");
+        savedTask.setTitle("Pan Comprado");
         savedTask.setStatus(Status.COMPLETED);
         TaskEntity updatedTask = taskEntityRepository.save(savedTask);
 
-        assertThat(updatedTask.getTitle()).isEqualTo("Updated Task Title");
+        assertThat(updatedTask.getTitle()).isEqualTo("Pan Comprado");
         assertThat(updatedTask.getStatus()).isEqualTo(Status.COMPLETED);
     }
 
     @Test
     void testDeleteTaskEntity() {
         UserEntity user = new UserEntity();
-        user.setEmail("testuser@example.com");
+        user.setEmail("cristian@outlook.com");
         user.setPassword("password");
         UserEntity savedUser = userEntityRepository.save(user);
 
         TaskEntity task = new TaskEntity();
-        task.setTitle("Test Task");
-        task.setDescription("This is a test task");
+        task.setTitle("Comprar Pan");
+        task.setDescription("Ir a comprar pan");
         task.setStatus(Status.PENDING);
         task.setUserEntity(savedUser);
         TaskEntity savedTask = taskEntityRepository.save(task);
@@ -109,20 +109,20 @@ public class ITaskEntityRepositoryTest {
     @Test
     void testCountByUserEntityId() {
         UserEntity user = new UserEntity();
-        user.setEmail("testuser@example.com");
+        user.setEmail("cristian@outlook.com");
         user.setPassword("password");
         UserEntity savedUser = userEntityRepository.save(user);
 
         TaskEntity task1 = new TaskEntity();
-        task1.setTitle("Task 1");
-        task1.setDescription("Description 1");
+        task1.setTitle("Comprar Pan");
+        task1.setDescription("Ir a comprar pan");
         task1.setStatus(Status.PENDING);
         task1.setUserEntity(savedUser);
         taskEntityRepository.save(task1);
 
         TaskEntity task2 = new TaskEntity();
-        task2.setTitle("Task 2");
-        task2.setDescription("Description 2");
+        task2.setTitle("Comprar Azucar");
+        task2.setDescription("Ir a comprar azucar");
         task2.setStatus(Status.IN_PROGRESS);
         task2.setUserEntity(savedUser);
         taskEntityRepository.save(task2);

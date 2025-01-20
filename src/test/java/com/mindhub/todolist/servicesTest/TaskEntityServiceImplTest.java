@@ -50,29 +50,29 @@ public class TaskEntityServiceImplTest {
         // Configurar datos de prueba
         mockTask = new TaskEntity();
         mockTask.setId(1L);
-        mockTask.setTitle("Test Task");
-        mockTask.setDescription("Test Description");
+        mockTask.setTitle("Comprar Pan");
+        mockTask.setDescription("Ir a comprar pan");
         mockTask.setStatus(Status.PENDING);
 
         mockRequestDTO = new TaskEntityRequestDTO(
-                "Test Task",
-                "Test Description",
+                "Comprar Pan",
+                "Ir a comprar pan",
                 Status.PENDING,  // Ahora usando el enum Status
                 1L
         );
 
         mockResponseDTO = new TaskEntityResponseDTO(
                 1L,
-                "Test Task",
-                "Test Description",
+                "Comprar Pan",
+                "Ir a comprar pan",
                 Status.PENDING
         );
 
         mockUpdateDTO = new TaskEntityUpdateDTO(
                 1L,
-                "Updated Task",
-                "Updated Description",
-                Status.COMPLETED // Actualizado para usar el enum
+                "Comprar Azucar",
+                "Ir a comprar azucar",
+                Status.COMPLETED
         );
     }
 

@@ -53,37 +53,37 @@ public class AdminEntityServiceImplTest {
     @BeforeEach
     void setUp() {
 
+        UserEntity userEntity = new UserEntity();
+        userEntity.setEmail("cristian@outlook.com");
+        userEntity.setPassword("password123");
+
         adminEntity = new AdminEntity();
         adminEntity.setId(1L);
-        adminEntity.setName("John");
-        adminEntity.setLastname("Doe");
-
-        UserEntity userEntity = new UserEntity();
-        userEntity.setEmail("john.doe@outlook.com");
-        userEntity.setPassword("password123");
+        adminEntity.setName("Cristian");
+        adminEntity.setLastname("Gomez");
         adminEntity.setUser(userEntity);
 
         DatosAutenticacionUsuario datosAutenticacionUsuario = new DatosAutenticacionUsuario(
-                "john.doe@outlook.com",
+                "cristian@outlook.com",
                 "password123"
         );
 
         adminEntityRequestDTO = new AdminEntityRequestDTO(
-                "John",
-                "Doe",
+                "Cristian",
+                "Gomez",
                 datosAutenticacionUsuario
         );
 
         adminEntityResponseDTO = new AdminEntityResponseDTO(
                 1L,
-                "John",
-                "Doe"
+                "Cristian",
+                "Gomez"
         );
 
         adminEntityUpdateDTO = new AdminEntityUpdateDTO(
                 1L,
-                "UpdatedName",
-                "UpdatedLastname"
+                "Maximiliano",
+                "Montenegro"
         );
     }
 
@@ -98,8 +98,8 @@ public class AdminEntityServiceImplTest {
         AdminEntityResponseDTO result = adminEntityService.savedAdminEntity(adminEntityRequestDTO);
 
         assertNotNull(result);
-        assertEquals("John", result.name());
-        assertEquals("Doe", result.lastname());
+        assertEquals("Cristian", result.name());
+        assertEquals("Gomez", result.lastname());
 
         verify(adminEntityRepository).save(adminEntity);
     }
@@ -127,8 +127,8 @@ public class AdminEntityServiceImplTest {
         AdminEntityResponseDTO result = adminEntityService.update(adminEntityUpdateDTO);
 
         assertNotNull(result);
-        assertEquals("UpdatedName", result.name());
-        assertEquals("UpdatedLastname", result.lastname());
+        assertEquals("Maximiliano", result.name());
+        assertEquals("Montenegro", result.lastname());
 
         verify(adminEntityRepository).save(adminEntity);
     }

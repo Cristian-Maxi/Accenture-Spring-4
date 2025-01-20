@@ -34,18 +34,18 @@ public class AdminEntityControllerTest {
     @Test
     public void testCreateAdminEntity() {
         DatosAutenticacionUsuario datosAutenticacionUsuario = new DatosAutenticacionUsuario(
-                "john.doe@outlook.com",
+                "cristian@outlook.com",
                 "password123"
         );
         AdminEntityRequestDTO requestDTO = new AdminEntityRequestDTO(
-                "John",
-                "Doe",
+                "Cristian",
+                "Gomez",
                 datosAutenticacionUsuario);
 
         AdminEntityResponseDTO responseDTO = new AdminEntityResponseDTO(
                 1L,
-                "John",
-                "Doe");
+                "Cristian",
+                "Gomez");
 
         when(adminEntityService.savedAdminEntity(any(AdminEntityRequestDTO.class))).thenReturn(responseDTO);
 
@@ -59,13 +59,13 @@ public class AdminEntityControllerTest {
     public void testUpdateAdminEntity() {
         AdminEntityUpdateDTO updateDTO = new AdminEntityUpdateDTO(
                 1L,
-                "newName",
-                "newLastname");
+                "Maximiliano",
+                "Montenegro");
 
         AdminEntityResponseDTO responseDTO = new AdminEntityResponseDTO(
                 1L,
-                "John",
-                "Doe");
+                "Maximiliano",
+                "Montenegro");
 
         when(adminEntityService.update(any(AdminEntityUpdateDTO.class))).thenReturn(responseDTO);
 

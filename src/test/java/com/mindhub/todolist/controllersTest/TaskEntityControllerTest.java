@@ -37,16 +37,16 @@ public class TaskEntityControllerTest {
     @Test
     public void testCreateTask() {
         TaskEntityRequestDTO requestDto = new TaskEntityRequestDTO(
-                "Titulo",
-                "Descripcion",
+                "Comprar Pan",
+                "Ir a comprar pan",
                 Status.PENDING,
                 1L
         );
 
         TaskEntityResponseDTO responseDto = new TaskEntityResponseDTO(
                 1L,
-                "Titulo",
-                "Descripcion",
+                "Comprar Pan",
+                "Ir a comprar pan",
                 Status.PENDING
         );
 
@@ -74,15 +74,15 @@ public class TaskEntityControllerTest {
     public void testUpdateTask() {
         TaskEntityUpdateDTO updateDto = new TaskEntityUpdateDTO(
                 1L,
-                "Titulo",
-                "Descripcion",
+                "Comprar Azucar",
+                "Ir a comprar azucar",
                 Status.PENDING
         );
 
         TaskEntityResponseDTO responseDto = new TaskEntityResponseDTO(
                 1L,
-                "Titulo",
-                "Descripcion",
+                "Comprar Azucar",
+                "Ir a comprar azucar",
                 Status.PENDING
         );
         when(taskEntityService.update(any(TaskEntityUpdateDTO.class))).thenReturn(responseDto);
